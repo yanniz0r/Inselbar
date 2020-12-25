@@ -6,6 +6,12 @@ module.exports = {
       unstable_isAuthorized: unstable_simpleRolesIsAuthorized,
     }),
   ],
+  api: {
+    bodyParser: {
+      sizeLimit: "10mb",
+    },
+  },
+  
   /* Uncomment this to customize the webpack config
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Note: we provide webpack above so you should not `require` it

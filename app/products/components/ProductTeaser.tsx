@@ -2,6 +2,7 @@ import { Product } from "@prisma/client";
 import { Link } from "blitz";
 import { FC } from "react";
 import { formatPrice } from "../product-utils";
+import {FaCocktail} from "react-icons/fa";
 
 interface ProductTeasterProps {
   product: Product;
@@ -10,21 +11,21 @@ interface ProductTeasterProps {
 const ProductTeaser: FC<ProductTeasterProps> = ({ product }) => {
   const price = formatPrice(product.price);
   return <Link href={`/products/${product.id}`} passHref>
-    <a className="block shadow-sm bg-white rounded-md flex overflow-hidden">
-      <div className="w-3/12 bg-center bg-cover" style={{ backgroundImage: `url(http://placekitten.com/300/400)` }} />
-      <div className="flex-grow p-3 ">
-        <div className="flex items-center">
-          <h3 className="text-xl flex-grow">{product.name}</h3>
-          <span>{price}</span>
+    <a className="block shadow-sm bg-white rounded-md overflow-hidden">
+      <div className="bg-center bg-cover w-full flex justify-center items-center text-5xl text-gray-500 text-opacity-50 bg-gray-300 h-52" style={{ backgroundImage: `url(${product.image})` }}>
+        {!product.image && <FaCocktail />}
+      </div>
+      <div className="flex-grow p-3">
+        <div className="flex items-center pb-1">
+          <h3 className="text-xl flex-grow font-bold text-gray-700">{product.name}</h3>
+          <span className="uppercase text-white bg-pink-500 block py-1 px-2 shadow-xl rounded-lg text-sm">{price}</span>
         </div>
-        <p className={`text-gray-500 ${product.available ? 'text-green-500' : 'text-red-500'}`}>{product.available ? 'Available' : 'Out of stock'}</p>
-        <p className="text-gray-500">{product.description}</p>
+        <p className={`text-gray-500 py-1 ${product.available ? 'text-green-500' : 'text-red-500'}`}>{product.available ? 'Available' : 'Out of stock'}</p>
+        <p className="text-gray-500 py-1">{product.description}</p>
         {product.available &&
-          <div className="flex justify-end">
             <Link href={`/checkout/${product.id}`} passHref>
-              <a className="bg-green-500 text-white block rounded-md p-1 text-sm">Order now</a>
+              <a className="bg-green-500 text-white text-center block rounded-md p-2 mt-3 text-md">Order now</a>
             </Link>
-          </div>
         }
       </div>
     </a>

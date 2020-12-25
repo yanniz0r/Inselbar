@@ -5,6 +5,7 @@ import { AuthorizationError, BlitzPage, useMutation, useParam, useQuery, useRout
 import { FC, Suspense } from "react";
 import createOrder from "app/checkout/mutations/createOrder"
 import { useCurrentUser } from "app/hooks/useCurrentUser";
+import { FaCocktail } from "react-icons/fa";
 
 const CheckoutPage: BlitzPage = (props) => {
   return <Page>
@@ -46,12 +47,17 @@ const Checkout: FC = () => {
   return <>
     <div className="bg-white my-6 shadow-sm rounded-lg overflow-hidden">
       <div className="relative">
-        <img src="http://placekitten.com/700/620" />
+        {product.image
+          ? <img src={product.image} />
+          : <div className="p-24 text-5xl flex justify-center items-center bg-gray-300 text-gray-500 text-opacity-50">
+              <FaCocktail />
+            </div>
+          }
         <div className="absolute top-0 right-0">
           <span className="uppercase text-white bg-pink-500 block py-1 px-2 shadow-xl rounded-lg m-2">{formatPrice(product.price)}</span>
         </div>
         <div className="absolute bottom-0 w-full">
-          <div className="p-4 bg-gradient-to-t from-black to-transparent py-3">
+          <div className="p-4 bg-gradient-to-t from-gray-700 to-transparent py-3">
             <h2 className="text-white font-bold text-4xl">{product.name}</h2>
           </div>
         </div>

@@ -9,3 +9,11 @@ export default async function createProduct({ data }: CreateProductInput, ctx: C
 
   return product
 }
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "10mb",
+    },
+  },
+}

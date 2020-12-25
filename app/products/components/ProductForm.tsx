@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import React from "react"
 import ProductsPage from "../pages/products";
 import { ProductInput, ProductInputType } from "../validations";
+import ImageUpload from "./ImageUpload";
 
 type ProductFormProps = {
   initialValues: any
@@ -41,6 +42,9 @@ const ProductForm = ({ initialValues, onSubmit }: ProductFormProps) => {
           Price (Cents):
         </label>
         <input type="number" name="price" className={INPUT_CLASS_NAME} value={form.values.price} onChange={form.handleChange} />
+      </div>
+      <div className="py-4">
+        <ImageUpload onChange={(value) => form.setFieldValue('image', value) } value={form.values.image} />
       </div>
       <button className="bg-green-500 block text-white px-4 py-2 rounded-md">Submit</button>
     </form>

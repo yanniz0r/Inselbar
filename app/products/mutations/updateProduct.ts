@@ -10,3 +10,11 @@ export default async function updateProduct({ where, data }: UpdateProductInput,
 
   return product
 }
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "10mb",
+    },
+  },
+}

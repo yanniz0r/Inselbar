@@ -14,7 +14,9 @@ export const ProductsList = () => {
   return (
     <div>
       {products.map((product) => (
-        <ProductTeaser product={product} />
+        <div className="mb-5">
+          <ProductTeaser product={product} />
+        </div>
       ))}
     </div>
   )
