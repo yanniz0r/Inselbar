@@ -1,9 +1,10 @@
-import { Product } from "@prisma/client";
 import Page from "app/components/Page";
 import { formatPrice } from "app/products/product-utils";
 import getProduct from "app/products/queries/getProduct";
-import { BlitzPage, useParam, useQuery, useRouter } from "blitz";
+import { AuthorizationError, BlitzPage, useMutation, useParam, useQuery, useRouter } from "blitz";
 import { FC, Suspense } from "react";
+import createOrder from "app/checkout/mutations/createOrder"
+import { useCurrentUser } from "app/hooks/useCurrentUser";
 
 const CheckoutPage: BlitzPage = (props) => {
   return <Page>
@@ -12,31 +13,57 @@ const CheckoutPage: BlitzPage = (props) => {
     <Suspense fallback="Loading...">
       <Checkout />
     </Suspense>
-    <button className="bg-blue-500 text-white w-full p-3 rounded-lg font-bold">
-      Order now
-    </button>
   </Page>
 }
 
 const Checkout: FC = () => {
+  const router = useRouter();
   const productId = useParam("productId", "number")
   const [product] = useQuery(getProduct, { where: { id: productId } })
-  return <div className="bg-white my-6 shadow-sm rounded-lg overflow-hidden">
-    <div className="relative">
-      <img src="http://placekitten.com/700/620" />
-      <div className="absolute top-0 right-0">
-        <span className="uppercase text-white bg-pink-500 block py-1 px-2 shadow-xl rounded-lg m-2">{formatPrice(product.price)}</span>
-      </div>
-      <div className="absolute bottom-0 w-full">
-        <div className="p-4 bg-gradient-to-t from-black to-transparent py-3">
-          <h2 className="text-white font-bold text-4xl">{product.name}</h2>
+  const [createOrderMutation, createOrderStatus] = useMutation(createOrder);
+  const currentUser = useCurrentUser();
+  const submitOrder = async () => {
+    if (!currentUser) {
+      throw new AuthorizationError();
+    }
+    const result = await createOrderMutation({
+      data: {
+        product: {
+          connect: {
+            id: product.id
+          },
+        },
+        user: {
+          connect: {
+            id: currentUser.id
+          },
+        },
+        price: product.price,
+      }
+    });
+    router.push(`/order/status/${result.id}`);
+  }
+  return <>
+    <div className="bg-white my-6 shadow-sm rounded-lg overflow-hidden">
+      <div className="relative">
+        <img src="http://placekitten.com/700/620" />
+        <div className="absolute top-0 right-0">
+          <span className="uppercase text-white bg-pink-500 block py-1 px-2 shadow-xl rounded-lg m-2">{formatPrice(product.price)}</span>
+        </div>
+        <div className="absolute bottom-0 w-full">
+          <div className="p-4 bg-gradient-to-t from-black to-transparent py-3">
+            <h2 className="text-white font-bold text-4xl">{product.name}</h2>
+          </div>
         </div>
       </div>
+      <div className="p-4">
+        {product.description}
+      </div>
     </div>
-    <div className="p-4">
-      {product.description}
-    </div>
-  </div>
+    <button type="button" onClick={submitOrder} className="bg-blue-500 text-white w-full p-3 rounded-lg font-bold">
+      Order now
+    </button>
+  </>
 }
 
 export default CheckoutPage;
