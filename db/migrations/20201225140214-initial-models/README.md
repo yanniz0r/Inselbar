@@ -1,6 +1,6 @@
-# Migration `20201225112140-initial-migration`
+# Migration `20201225140214-initial-models`
 
-This migration has been generated at 12/25/2020, 12:21:40 PM.
+This migration has been generated at 12/25/2020, 3:02:14 PM.
 You can check out the [state of the schema](./schema.prisma) after the migration.
 
 ## Database Steps
@@ -10,10 +10,7 @@ CREATE TABLE "User" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
-    "name" TEXT,
-    "email" TEXT NOT NULL,
-    "hashedPassword" TEXT,
-    "role" TEXT NOT NULL DEFAULT 'user'
+    "username" TEXT NOT NULL
 )
 
 CREATE TABLE "Session" (
@@ -31,7 +28,15 @@ CREATE TABLE "Session" (
     FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE
 )
 
-CREATE UNIQUE INDEX "User.email_unique" ON "User"("email")
+CREATE TABLE "Product" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "price" INTEGER NOT NULL,
+    "available" BOOLEAN NOT NULL DEFAULT true
+)
 
 CREATE UNIQUE INDEX "Session.handle_unique" ON "Session"("handle")
 ```
@@ -40,10 +45,10 @@ CREATE UNIQUE INDEX "Session.handle_unique" ON "Session"("handle")
 
 ```diff
 diff --git schema.prisma schema.prisma
-migration ..20201225112140-initial-migration
+migration ..20201225140214-initial-models
 --- datamodel.dml
 +++ datamodel.dml
-@@ -1,0 +1,38 @@
+@@ -1,0 +1,45 @@
 +// This is your Prisma schema file,
 +// learn more about it in the docs: https://pris.ly/d/prisma-schema
 +
@@ -62,10 +67,7 @@ migration ..20201225112140-initial-migration
 +  id             Int       @default(autoincrement()) @id
 +  createdAt      DateTime  @default(now())
 +  updatedAt      DateTime  @updatedAt
-+  name           String?
-+  email          String    @unique
-+  hashedPassword String?
-+  role           String    @default("user")
++  username       String
 +  sessions       Session[]
 +}
 +
@@ -81,6 +83,16 @@ migration ..20201225112140-initial-migration
 +  antiCSRFToken      String?
 +  publicData         String?
 +  privateData        String?
++}
++
++model Product {
++  id          Int      @default(autoincrement()) @id
++  createdAt   DateTime @default(now())
++  updatedAt   DateTime @updatedAt
++  name        String   
++  description String   
++  price       Int      
++  available   Boolean  @default(true)
 +}
 ```
 

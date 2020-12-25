@@ -19,30 +19,21 @@ export const LoginForm = (props: LoginFormProps) => {
       <Form
         submitText="Login"
         schema={LoginInput}
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ username: "" }}
         onSubmit={async (values) => {
           try {
             await loginMutation(values)
             props.onSuccess?.()
           } catch (error) {
-            if (error instanceof AuthenticationError) {
-              return { [FORM_ERROR]: "Sorry, those credentials are invalid" }
-            } else {
-              return {
-                [FORM_ERROR]:
-                  "Sorry, we had an unexpected error. Please try again. - " + error.toString(),
-              }
+            return {
+              [FORM_ERROR]:
+                "Sorry, we had an unexpected error. Please try again. - " + error.toString(),
             }
           }
         }}
       >
-        <LabeledTextField name="email" label="Email" placeholder="Email" />
-        <LabeledTextField name="password" label="Password" placeholder="Password" type="password" />
+        <LabeledTextField name="username" label="Your name" placeholder="Jane Doe" />
       </Form>
-
-      <div style={{ marginTop: "1rem" }}>
-        Or <Link href="/signup">Sign Up</Link>
-      </div>
     </div>
   )
 }
