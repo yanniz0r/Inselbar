@@ -42,7 +42,7 @@ const Checkout: FC = () => {
         price: product.price,
       }
     });
-    router.push(`/order/status/${result.id}`);
+    router.push(`/orders/status/${result.id}`);
   }
   return <>
     <div className="bg-white my-6 shadow-sm rounded-lg overflow-hidden">
