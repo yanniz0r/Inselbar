@@ -1,5 +1,5 @@
 import React from "react"
-import { useMutation, useQuery, useRouter } from "blitz"
+import { useMutation, useQuery } from "blitz"
 import login from "app/auth/mutations/login"
 import { useFormik } from "formik"
 import checkPasscode from "../queries/checkPasscode"
