@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useRef, useState } from "react"
-import { useMutation, useRouter } from "blitz"
+import { useMutation } from "blitz"
 import verifyPasscode from "../mutations/verifyPasscode"
 
 const INPUT_BASE_CLASS_NAME = "border-2 border-gray-200 rounded-lg w-14 text-center mx-1 text-5xl"
