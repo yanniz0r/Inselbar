@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { useRouter, BlitzPage } from "blitz"
 import { LoginForm } from "app/auth/components/LoginForm"
 import Page from "app/components/Page"
@@ -8,7 +8,9 @@ const LoginPage: BlitzPage = () => {
 
   return (
     <Page>
-      <LoginForm onSuccess={() => router.push("/")} />
+      <Suspense fallback="Loading...">
+        <LoginForm onSuccess={() => router.push("/")} />
+      </Suspense>
     </Page>
   )
 }

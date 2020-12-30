@@ -1,7 +1,9 @@
 import React from "react"
-import { useMutation } from "blitz"
+import { useMutation, useQuery, useRouter } from "blitz"
 import login from "app/auth/mutations/login"
 import { useFormik } from "formik"
+import checkPasscode from "../queries/checkPasscode"
+import PasscodeCheck from "./PasscodeCheck"
 
 type LoginFormProps = {
   onSuccess?: () => void
@@ -18,6 +20,14 @@ export const LoginForm = (props: LoginFormProps) => {
       props.onSuccess?.()
     },
   })
+
+  const [isPasscodeValid] = useQuery(checkPasscode, undefined, {
+    cacheTime: 0,
+  })
+
+  if (!isPasscodeValid) {
+    return <PasscodeCheck />
+  }
 
   return (
     <div>
