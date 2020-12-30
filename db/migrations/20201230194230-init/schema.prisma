@@ -42,15 +42,24 @@ model Product {
   description String   
   price       Int      
   available   Boolean  @default(true)
+  intensity   String?
   image       String?
 }
 
 model Order {
   id          Int         @default(autoincrement()) @id
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   productId   Int
   product     Product     @relation(fields: [productId], references: [id])
   userId      Int
   user        User        @relation(fields: [userId], references: [id])
   price       Int
-  status      String      @default("submitted")
+  status      OrderStatus @default(SUBMITTED)
+}
+
+enum OrderStatus {
+  SUBMITTED
+  INPROGRESS
+  DONE
 }

@@ -1,6 +1,6 @@
+import { OrderStatus } from "@prisma/client"
 import Page from "app/components/Page"
 import { useCurrentUser } from "app/hooks/useCurrentUser"
-import OrderStatus from "app/order/order-status"
 import getOrders from "app/order/queries/getOrders"
 import { AuthorizationError, BlitzPage, useQuery } from "blitz"
 import { FC, Suspense } from "react"
@@ -38,9 +38,9 @@ const OrdersInfo: FC = () => {
           </td>
           <td>
             <span>
-              {order.status === OrderStatus.Submitted && <FaHourglassHalf />}
-              {order.status === OrderStatus.InProgress && <GiLemon />}
-              {order.status === OrderStatus.Done && <FaCocktail />}
+              {order.status === OrderStatus.SUBMITTED && <FaHourglassHalf />}
+              {order.status === OrderStatus.INPROGRESS && <GiLemon />}
+              {order.status === OrderStatus.DONE && <FaCocktail />}
             </span>
           </td>
         </tr>

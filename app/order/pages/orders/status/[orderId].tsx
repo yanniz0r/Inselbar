@@ -2,10 +2,10 @@ import Page from "app/components/Page"
 import { BlitzPage, useParam, useQuery } from "blitz"
 import { FC, Suspense } from "react"
 import getOrder from "app/order/queries/getOrder"
-import OrderStatus from "app/order/order-status"
 import { BiCheck } from "react-icons/bi"
 import { FaCocktail } from "react-icons/fa"
 import { GiLemon } from "react-icons/gi"
+import { OrderStatus } from "@prisma/client"
 
 const OrderStatusPage: BlitzPage = () => {
   return (
@@ -27,13 +27,13 @@ const OrderStatusInfos: FC = () => {
 
   let progressClassName
   switch (order.status) {
-    case OrderStatus.InProgress:
+    case OrderStatus.INPROGRESS:
       progressClassName = "w-2/4"
       break
-    case OrderStatus.Done:
+    case OrderStatus.DONE:
       progressClassName = "w-full"
       break
-    case OrderStatus.Submitted:
+    case OrderStatus.SUBMITTED:
     default:
       progressClassName = "w-0"
   }
@@ -74,7 +74,7 @@ const OrderStatusInfos: FC = () => {
             <div className="absolute flex flex-col items-center left-1/2 transform -translate-x-1/2">
               <div
                 className={`mb-2 h-8 w-8 text-black text-opacity-40 flex justify-center items-center ${
-                  order.status !== OrderStatus.Submitted ? "bg-green-400" : "bg-gray-200"
+                  order.status !== OrderStatus.SUBMITTED ? "bg-green-400" : "bg-gray-200"
                 } rounded-full`}
               >
                 <GiLemon />
@@ -88,7 +88,7 @@ const OrderStatusInfos: FC = () => {
             <div className="absolute flex flex-col items-center left-full transform -translate-x-1/2">
               <div
                 className={`mb-2 h-8 w-8 text-black text-opacity-40 flex justify-center items-center ${
-                  order.status === OrderStatus.Done ? "bg-green-400" : "bg-gray-200"
+                  order.status === OrderStatus.DONE ? "bg-green-400" : "bg-gray-200"
                 } rounded-full`}
               >
                 <FaCocktail />
