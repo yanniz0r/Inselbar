@@ -50,6 +50,13 @@ const PasscodeCheck: FC<PasscodeCheckProps> = ({ onSuccess }) => {
 
   return (
     <div className="flex-col flex h-full justify-center items-center">
+      <style scoped jsx>{`
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      `}</style>
       <h1 className="text-3xl text-center mb-3">Please enter the Bars passcode to continue</h1>
       <p className="text-center mb-5 text-gray-800">
         In order to prevent some nasty booze thieves from hijacking the bar, we need to confirm that
@@ -57,7 +64,7 @@ const PasscodeCheck: FC<PasscodeCheckProps> = ({ onSuccess }) => {
       </p>
       <form>
         <input
-          type="text"
+          type="number"
           disabled={verifyPasscodeStatus.isLoading}
           className={`${INPUT_BASE_CLASS_NAME} ${error ? "border-red-500" : ""}`}
           ref={input1}
@@ -65,7 +72,7 @@ const PasscodeCheck: FC<PasscodeCheckProps> = ({ onSuccess }) => {
           onChange={onKeyDown(0)}
         />
         <input
-          type="text"
+          type="number"
           disabled={verifyPasscodeStatus.isLoading}
           className={`${INPUT_BASE_CLASS_NAME} ${error ? "border-red-500" : ""}`}
           ref={input2}
@@ -73,7 +80,7 @@ const PasscodeCheck: FC<PasscodeCheckProps> = ({ onSuccess }) => {
           onChange={onKeyDown(1)}
         />
         <input
-          type="text"
+          type="number"
           disabled={verifyPasscodeStatus.isLoading}
           className={`${INPUT_BASE_CLASS_NAME} ${error ? "border-red-500" : ""}`}
           ref={input3}
@@ -81,7 +88,7 @@ const PasscodeCheck: FC<PasscodeCheckProps> = ({ onSuccess }) => {
           onChange={onKeyDown(2)}
         />
         <input
-          type="text"
+          type="number"
           disabled={verifyPasscodeStatus.isLoading}
           className={`${INPUT_BASE_CLASS_NAME} ${error ? "border-red-500" : ""}`}
           ref={input4}
