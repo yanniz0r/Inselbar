@@ -31,7 +31,7 @@ const Page: FC = (props) => {
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-screen-md px-4 pt-4">{props.children}</div>
+      <div className="mx-auto w-full max-w-screen-md px-4 pt-4">{props.children}</div>
     </div>
   )
 }
