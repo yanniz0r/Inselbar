@@ -1,9 +1,7 @@
 import React from "react"
-import { AuthenticationError, Link, useMutation } from "blitz"
-import { LabeledTextField } from "app/components/LabeledTextField"
-import { Form, FORM_ERROR } from "app/components/Form"
+import { useMutation } from "blitz"
 import login from "app/auth/mutations/login"
-import { LoginInput } from "app/auth/validations"
+import { useFormik } from "formik"
 
 type LoginFormProps = {
   onSuccess?: () => void
@@ -11,29 +9,31 @@ type LoginFormProps = {
 
 export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login)
+  const form = useFormik({
+    initialValues: {
+      username: "",
+    },
+    onSubmit: async (values) => {
+      await loginMutation(values)
+      props.onSuccess?.()
+    },
+  })
 
   return (
     <div>
-      <h1>Login</h1>
-
-      <Form
-        submitText="Login"
-        schema={LoginInput}
-        initialValues={{ username: "" }}
-        onSubmit={async (values) => {
-          try {
-            await loginMutation(values)
-            props.onSuccess?.()
-          } catch (error) {
-            return {
-              [FORM_ERROR]:
-                "Sorry, we had an unexpected error. Please try again. - " + error.toString(),
-            }
-          }
-        }}
-      >
-        <LabeledTextField name="username" label="Your name" placeholder="Jane Doe" />
-      </Form>
+      <form onSubmit={form.handleSubmit}>
+        <input
+          className="block w-full p-1 border-gray-100 rounded-md border-2"
+          type="text"
+          name="username"
+          placeholder="Jane Doe"
+          value={form.values.username}
+          onChange={form.handleChange}
+        />
+        <button type="submit" className="mt-4 bg-green-500 block text-white px-4 py-2 rounded-md">
+          Sign In
+        </button>
+      </form>
     </div>
   )
 }

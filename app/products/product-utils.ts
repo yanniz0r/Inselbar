@@ -1,14 +1,12 @@
-import { PureComponent } from "react";
-
 export const formatPrice = (total: number) => {
-  const priceRest = total % 100;
-  let price = 'Free';
+  const priceRest = total % 100
+  let price = "Free"
   if (total) {
-    let cents = '-';
+    let cents = "-"
     if (priceRest) {
-      cents = priceRest < 10 ? '0' + priceRest : priceRest.toString()
-    } 
-    price = `${(total - priceRest) / 100},${cents}€`;
+      cents = priceRest < 10 ? "0" + priceRest : priceRest.toString()
+    }
+    price = `${(total - priceRest) / 100},${cents}€`
   }
-  return price;
+  return price
 }

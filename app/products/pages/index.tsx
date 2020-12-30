@@ -1,12 +1,11 @@
 import { Suspense } from "react"
 import Layout from "app/layouts/Layout"
-import { Link, usePaginatedQuery, useRouter, BlitzPage } from "blitz"
+import { usePaginatedQuery, BlitzPage } from "blitz"
 import getProducts from "app/products/queries/getProducts"
 import ProductTeaser from "app/products/components/ProductTeaser"
 import Page from "app/components/Page"
 
 export const ProductsList = () => {
-  const router = useRouter()
   const [{ products }] = usePaginatedQuery(getProducts, {
     orderBy: { id: "asc" },
   })

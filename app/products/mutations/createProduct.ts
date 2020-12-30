@@ -5,7 +5,16 @@ type CreateProductInput = Pick<Prisma.ProductCreateArgs, "data">
 export default async function createProduct({ data }: CreateProductInput, ctx: Ctx) {
   ctx.session.authorize()
 
-  const product = await db.product.create({ data })
+  const product = await db.product.create({
+    data: {
+      description: data.description,
+      name: data.name,
+      price: data.price,
+      image: data.image,
+      intensity: data.intensity,
+      available: true,
+    },
+  })
 
   return product
 }

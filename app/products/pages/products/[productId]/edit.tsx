@@ -25,7 +25,10 @@ export const EditProduct = () => {
               data: {
                 name: values.name,
                 description: values.description,
-                price: values.price
+                price: values.price,
+                image: values.image,
+                intensity: values.intensity,
+                available: values.available,
               },
             })
             await setQueryData(updated)
