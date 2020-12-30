@@ -6,11 +6,12 @@ import { BiCheck } from "react-icons/bi"
 import { FaCocktail } from "react-icons/fa"
 import { GiLemon } from "react-icons/gi"
 import { OrderStatus } from "@prisma/client"
+import LoadingSpinner from "app/components/LoadingSpinner"
 
 const OrderStatusPage: BlitzPage = () => {
   return (
     <Page>
-      <Suspense fallback="Loading...">
+      <Suspense fallback={<LoadingSpinner />}>
         <OrderStatusInfos />
       </Suspense>
     </Page>

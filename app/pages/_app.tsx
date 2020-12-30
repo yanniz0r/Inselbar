@@ -1,6 +1,7 @@
 import LoginForm from "app/auth/components/LoginForm"
 import PasscodeCheck from "app/auth/components/PasscodeCheck"
 import { PasscodeRequiredError } from "app/auth/errors"
+import LoadingSpinner from "app/components/LoadingSpinner"
 import Page from "app/components/Page"
 import { AppProps, ErrorComponent, useRouter, AuthenticationError, AuthorizationError } from "blitz"
 import { Suspense } from "react"
@@ -32,7 +33,7 @@ function RootErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   if (error instanceof AuthenticationError) {
     return (
       <Page>
-        <Suspense fallback="Loading...">
+        <Suspense fallback={<LoadingSpinner />}>
           <LoginForm onSuccess={resetErrorBoundary} />
         </Suspense>
       </Page>

@@ -6,6 +6,7 @@ import { FC, Suspense } from "react"
 import createOrder from "app/checkout/mutations/createOrder"
 import { useCurrentUser } from "app/hooks/useCurrentUser"
 import { FaCocktail } from "react-icons/fa"
+import LoadingSpinner from "app/components/LoadingSpinner"
 
 const CheckoutPage: BlitzPage = (props) => {
   return (
@@ -15,7 +16,7 @@ const CheckoutPage: BlitzPage = (props) => {
         Please check your order and whether you have capacity to destroy the tasty liquid you are
         going to order.
       </p>
-      <Suspense fallback="Loading...">
+      <Suspense fallback={<LoadingSpinner />}>
         <Checkout />
       </Suspense>
     </Page>

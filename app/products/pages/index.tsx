@@ -4,6 +4,7 @@ import { usePaginatedQuery, BlitzPage } from "blitz"
 import getProducts from "app/products/queries/getProducts"
 import ProductTeaser from "app/products/components/ProductTeaser"
 import Page from "app/components/Page"
+import LoadingSpinner from "app/components/LoadingSpinner"
 
 export const ProductsList = () => {
   const [{ products }] = usePaginatedQuery(getProducts, {
@@ -24,7 +25,7 @@ export const ProductsList = () => {
 const ProductsPage: BlitzPage = () => {
   return (
     <Page>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<LoadingSpinner />}>
         <ProductsList />
       </Suspense>
     </Page>

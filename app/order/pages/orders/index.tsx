@@ -1,4 +1,5 @@
 import { OrderStatus } from "@prisma/client"
+import LoadingSpinner from "app/components/LoadingSpinner"
 import Page from "app/components/Page"
 import { useCurrentUser } from "app/hooks/useCurrentUser"
 import getOrders from "app/order/queries/getOrders"
@@ -10,7 +11,7 @@ import { GiLemon } from "react-icons/gi"
 const OrdersPage: BlitzPage = () => {
   return (
     <Page>
-      <Suspense fallback="Loading...">
+      <Suspense fallback={<LoadingSpinner />}>
         <OrdersInfo />
       </Suspense>
     </Page>
