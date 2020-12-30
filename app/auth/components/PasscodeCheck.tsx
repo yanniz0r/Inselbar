@@ -4,7 +4,11 @@ import verifyPasscode from "../mutations/verifyPasscode"
 
 const INPUT_BASE_CLASS_NAME = "border-2 border-gray-200 rounded-lg w-14 text-center mx-1 text-5xl"
 
-const PasscodeCheck: FC = () => {
+interface PasscodeCheckProps {
+  onSuccess?(): void
+}
+
+const PasscodeCheck: FC<PasscodeCheckProps> = ({ onSuccess }) => {
   const [verifyPasscodeMutation, verifyPasscodeStatus] = useMutation(verifyPasscode)
 
   const [passcode, setPasscode] = useState<Array<number | undefined>>([])
@@ -19,9 +23,9 @@ const PasscodeCheck: FC = () => {
   const inputRefs = [input1, input2, input3, input4]
 
   const submit = async (newPasscode: string) => {
-    const result = await verifyPasscodeMutation(newPasscode)
-    console.log(result)
-    if (result) {
+    const isPasscodeValid = await verifyPasscodeMutation(newPasscode)
+    if (isPasscodeValid) {
+      onSuccess?.()
       router.push("/login")
     } else {
       setError(true)

@@ -26,7 +26,7 @@ export const LoginForm = (props: LoginFormProps) => {
   })
 
   if (!isPasscodeValid) {
-    return <PasscodeCheck />
+    return <PasscodeCheck onSuccess={props.onSuccess} />
   }
 
   return (
