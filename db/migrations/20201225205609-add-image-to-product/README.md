@@ -19,7 +19,7 @@ migration 20201225170718-add-order-status..20201225205609-add-image-to-product
 @@ -2,9 +2,9 @@
  // learn more about it in the docs: https://pris.ly/d/prisma-schema
  datasource db {
-   provider = "postgresl"
+   provider = "postgresql"
 -  url = "***"
 +  url = "***"
  }

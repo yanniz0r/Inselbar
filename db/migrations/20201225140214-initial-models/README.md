@@ -53,7 +53,7 @@ migration ..20201225140214-initial-models
 +// learn more about it in the docs: https://pris.ly/d/prisma-schema
 +
 +datasource db {
-+  provider = "postgresl"
++  provider = "postgresql"
 +  url = "***"
 +}
 +
