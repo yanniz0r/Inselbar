@@ -19,7 +19,7 @@ migration 20201225205609-add-image-to-product..20201226132438-add-intensity-to-p
 @@ -2,9 +2,9 @@
  // learn more about it in the docs: https://pris.ly/d/prisma-schema
  datasource db {
-   provider = "sqlite"
+   provider = "postgresl"
 -  url = "***"
 +  url = "***"
  }

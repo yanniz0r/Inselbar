@@ -34,7 +34,7 @@ migration 20201225162430..20201225170718-add-order-status
 @@ -2,9 +2,9 @@
  // learn more about it in the docs: https://pris.ly/d/prisma-schema
  datasource db {
-   provider = "sqlite"
+   provider = "postgresl"
 -  url = "***"
 +  url = "***"
  }

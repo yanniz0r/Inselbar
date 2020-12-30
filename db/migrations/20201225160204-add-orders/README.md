@@ -26,7 +26,7 @@ migration 20201225140214-initial-models..20201225160204-add-orders
 @@ -2,9 +2,9 @@
  // learn more about it in the docs: https://pris.ly/d/prisma-schema
  datasource db {
-   provider = "sqlite"
+   provider = "postgresl"
 -  url = "***"
 +  url = "***"
  }

@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url = "***"
 }
 
@@ -42,6 +42,8 @@ model Product {
   description String   
   price       Int      
   available   Boolean  @default(true)
+  intensity   String?
+  image       String?
 }
 
 model Order {
@@ -51,4 +53,5 @@ model Order {
   userId      Int
   user        User        @relation(fields: [userId], references: [id])
   price       Int
+  status      String      @default("submitted")
 }
