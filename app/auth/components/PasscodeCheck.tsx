@@ -14,8 +14,6 @@ const PasscodeCheck: FC<PasscodeCheckProps> = ({ onSuccess }) => {
   const [passcode, setPasscode] = useState<Array<number | undefined>>([])
   const [error, setError] = useState(false)
 
-  const router = useRouter()
-
   const input1 = useRef<HTMLInputElement>(null)
   const input2 = useRef<HTMLInputElement>(null)
   const input3 = useRef<HTMLInputElement>(null)
@@ -26,7 +24,6 @@ const PasscodeCheck: FC<PasscodeCheckProps> = ({ onSuccess }) => {
     const isPasscodeValid = await verifyPasscodeMutation(newPasscode)
     if (isPasscodeValid) {
       onSuccess?.()
-      router.push("/login")
     } else {
       setError(true)
       setPasscode([])
