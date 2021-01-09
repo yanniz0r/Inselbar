@@ -2,7 +2,7 @@ import Page from "app/components/Page"
 import { BlitzPage, useMutation, useQuery } from "blitz"
 import { FC, Suspense } from "react"
 import getOrders from "app/order/queries/getOrders"
-import { Order, OrderStatus } from "@prisma/client"
+import { Order } from "@prisma/client"
 import updateOrder from "app/order/mutations/updateOrder"
 
 const BarkeeperOrdersPage: BlitzPage = () => {
@@ -20,19 +20,19 @@ const Orders: FC = () => {
   const [orders, ordersQuery] = useQuery(getOrders, {
     where: {
       status: {
-        not: OrderStatus.DONE,
+        not: "DONE",
       },
     },
   })
   const [updateOrderMutation] = useMutation(updateOrder)
 
   const prepare = (order: Order) => async () => {
-    await updateOrderMutation({ where: { id: order.id }, data: { status: OrderStatus.INPROGRESS } })
+    await updateOrderMutation({ where: { id: order.id }, data: { status: "INPROGRESS" } })
     await ordersQuery.refetch()
   }
 
   const complete = (order: Order) => async () => {
-    await updateOrderMutation({ where: { id: order.id }, data: { status: OrderStatus.DONE } })
+    await updateOrderMutation({ where: { id: order.id }, data: { status: "DONE" } })
     await ordersQuery.refetch()
   }
 
@@ -45,7 +45,7 @@ const Orders: FC = () => {
           </td>
           <td>for {order.user.username}</td>
           <td className="py-4 flex justify-end">
-            {order.status === OrderStatus.INPROGRESS ? (
+            {order.status === "INPROGRESS" ? (
               <button
                 type="button"
                 className="bg-green-500 text-white rounded-lg p-1"

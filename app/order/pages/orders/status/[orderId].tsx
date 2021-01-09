@@ -5,7 +5,6 @@ import getOrder from "app/order/queries/getOrder"
 import { BiCheck } from "react-icons/bi"
 import { FaCocktail } from "react-icons/fa"
 import { GiLemon } from "react-icons/gi"
-import { OrderStatus } from "@prisma/client"
 import LoadingSpinner from "app/components/LoadingSpinner"
 
 const OrderStatusPage: BlitzPage = () => {
@@ -28,13 +27,13 @@ const OrderStatusInfos: FC = () => {
 
   let progressClassName
   switch (order.status) {
-    case OrderStatus.INPROGRESS:
+    case "INPROGRESS":
       progressClassName = "w-2/4"
       break
-    case OrderStatus.DONE:
+    case "DONE":
       progressClassName = "w-full"
       break
-    case OrderStatus.SUBMITTED:
+    case "SUBMITTED":
     default:
       progressClassName = "w-0"
   }
@@ -75,7 +74,7 @@ const OrderStatusInfos: FC = () => {
             <div className="absolute flex flex-col items-center left-1/2 transform -translate-x-1/2">
               <div
                 className={`mb-2 h-8 w-8 text-black text-opacity-40 flex justify-center items-center ${
-                  order.status !== OrderStatus.SUBMITTED ? "bg-green-400" : "bg-gray-200"
+                  order.status !== "SUBMITTED" ? "bg-green-400" : "bg-gray-200"
                 } rounded-full`}
               >
                 <GiLemon />
@@ -89,7 +88,7 @@ const OrderStatusInfos: FC = () => {
             <div className="absolute flex flex-col items-center left-full transform -translate-x-1/2">
               <div
                 className={`mb-2 h-8 w-8 text-black text-opacity-40 flex justify-center items-center ${
-                  order.status === OrderStatus.DONE ? "bg-green-400" : "bg-gray-200"
+                  order.status === "DONE" ? "bg-green-400" : "bg-gray-200"
                 } rounded-full`}
               >
                 <FaCocktail />

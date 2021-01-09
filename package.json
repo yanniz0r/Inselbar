@@ -31,10 +31,10 @@
     ]
   },
   "dependencies": {
-    "@prisma/cli": "~2.12",
-    "@prisma/client": "~2.12",
+    "@prisma/cli": "~2.13",
+    "@prisma/client": "~2.13",
     "autoprefixer": "10.1.0",
-    "blitz": "0.27.1",
+    "blitz": "0.28.0",
     "final-form": "4.20.1",
     "formik": "2.2.6",
     "postcss": "8.2.1",

@@ -39,9 +39,9 @@ const OrdersInfo: FC = () => {
           </td>
           <td>
             <span>
-              {order.status === OrderStatus.SUBMITTED && <FaHourglassHalf />}
-              {order.status === OrderStatus.INPROGRESS && <GiLemon />}
-              {order.status === OrderStatus.DONE && <FaCocktail />}
+              {order.status === "SUBMITTED" && <FaHourglassHalf />}
+              {order.status === "INPROGRESS" && <GiLemon />}
+              {order.status === "DONE" && <FaCocktail />}
             </span>
           </td>
         </tr>
